@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 灰色 -->
+    <color name="huise">#EEEED1</color>
+    <!-- 深灰 -->
+    <color name="henhui">#8B8B7A</color>
+    
+    <!-- 透明的 -->
+    <color name="transparent">#00000000</color>
+    <!-- 天蓝 -->
+    <color name="tianlan">#BCD2EE</color>
+    
+    <!-- 蓝 -->
+    <color name="lans">#00BFFF</color>
+    <color name="lan">#B0C4DE</color>
+    
+    <!-- 橘黄 -->
+
+	<color name="juhuang">#FF6347</color>
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+      <color name="possible_result_points">#c0ffff00</color> 
+      <color name="input_btn_default">#EE3B3B</color>
+      <color name="input_btn_passed">#EE6363</color>
+      <color name="input_btn_enable">#666666</color>
+
+     <color name="window_bg">#f2f2f2</color>
+    
+</resources>
+
+
+

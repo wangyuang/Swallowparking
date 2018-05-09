@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+   	android:background="#ffffff"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <include 
+        
+        layout="@layout/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        
+        />
+    <LinearLayout 
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp" >
+	  <!--   <TextView 
+	        android:id="@+id/text_info"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="20dp"
+	        android:textColor="@color/juhuang"
+	        android:text="修改名字:"
+	        /> -->
+	    
+	    <EditText 
+	        android:id="@+id/edit_info"
+	        android:layout_marginTop="25dp"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@null"
+	        android:hint="输入你修改的信息"
+	        />
+	    <View 
+	        android:layout_width="match_parent"
+	        android:layout_height="0.1dp"
+	        android:layout_marginTop="5dp"
+	        android:layout_marginLeft="2dp"
+	        android:layout_marginRight="2dp"
+	        android:background="@color/henhui"
+	        />
+	    <Button 
+	        android:id="@+id/btn_info"
+	        android:layout_marginTop="30dp"
+	        android:layout_width="match_parent"
+	        android:layout_height="50dp"
+	        android:text="保存"
+	        />
+	</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,5 @@
+# view res/layout/smssdk_avatar_page.xml #generated:26
+# view res/layout/smssdk_avatar_picker_item.xml #generated:7
+# view res/layout/smssdk_personal_info.xml #generated:15
+-keep class com.mob.tools.gui.AsyncImageView { <init>(...); }
+

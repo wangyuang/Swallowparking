@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "C:\\Users\\WYA\\Desktop\\daima\\yinyong\\Swallowparking\\shortMessageSDKGUI\\build\\intermediates\\res\\merged\\release\\layout\\smssdk_avatar_picker_item.xml",
+        "source": "C:\\Users\\WYA\\Desktop\\daima\\yinyong\\Swallowparking\\shortMessageSDKGUI\\src\\main\\res\\layout\\smssdk_avatar_picker_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\WYA\\Desktop\\daima\\yinyong\\Swallowparking\\shortMessageSDKGUI\\build\\intermediates\\res\\merged\\release\\layout\\smssdk_avatar_picker_page.xml",
+        "source": "C:\\Users\\WYA\\Desktop\\daima\\yinyong\\Swallowparking\\shortMessageSDKGUI\\src\\main\\res\\layout\\smssdk_avatar_picker_page.xml"
+    },
+    {
+        "merged": "C:\\Users\\WYA\\Desktop\\daima\\yinyong\\Swallowparking\\shortMessageSDKGUI\\build\\intermediates\\res\\merged\\release\\layout\\smssdk_personal_info.xml",
+        "source": "C:\\Users\\WYA\\Desktop\\daima\\yinyong\\Swallowparking\\shortMessageSDKGUI\\src\\main\\res\\layout\\smssdk_personal_info.xml"
+    },
+    {
+        "merged": "C:\\Users\\WYA\\Desktop\\daima\\yinyong\\Swallowparking\\shortMessageSDKGUI\\build\\intermediates\\res\\merged\\release\\layout\\smssdk_titlebar.xml",
+        "source": "C:\\Users\\WYA\\Desktop\\daima\\yinyong\\Swallowparking\\shortMessageSDKGUI\\src\\main\\res\\layout\\smssdk_titlebar.xml"
+    },
+    {
+        "merged": "C:\\Users\\WYA\\Desktop\\daima\\yinyong\\Swallowparking\\shortMessageSDKGUI\\build\\intermediates\\res\\merged\\release\\layout\\smssdk_avatar_page.xml",
+        "source": "C:\\Users\\WYA\\Desktop\\daima\\yinyong\\Swallowparking\\shortMessageSDKGUI\\src\\main\\res\\layout\\smssdk_avatar_page.xml"
+    },
+    {
+        "merged": "C:\\Users\\WYA\\Desktop\\daima\\yinyong\\Swallowparking\\shortMessageSDKGUI\\build\\intermediates\\res\\merged\\release\\layout\\smssdk_popup_dialog.xml",
+        "source": "C:\\Users\\WYA\\Desktop\\daima\\yinyong\\Swallowparking\\shortMessageSDKGUI\\src\\main\\res\\layout\\smssdk_popup_dialog.xml"
+    }
+]

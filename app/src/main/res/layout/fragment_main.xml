@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <RelativeLayout 
+    	android:background="@drawable/parking_home_bg_bar"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        <RelativeLayout
+	        android:layout_centerInParent="true"
+	        android:layout_width="150dp"
+	        android:layout_height="60dp"
+	        android:padding="10dp"
+	        android:background="@drawable/scan_unlock">
+	        <Button 
+	            android:id="@+id/btn_scan"
+	            android:layout_centerInParent="true"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@color/transparent"
+	            android:drawableLeft="@drawable/scan_unlock_img"
+	            android:drawablePadding="13dp"
+	            android:text="扫码开锁"
+	            android:textSize="15dp"
+	            android:textColor="#ffffff" />
+	    </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout 
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_number_open_clock"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        
+        <ImageView 
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/park_img"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/pub_tab_ic_parking_selected"
+            />
+        <TextView 
+            android:textColor="#000000"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/park_img"
+            android:text="输入车位号，开锁"
+            />
+    </RelativeLayout>
+    <View 
+        android:background="@color/henhui"
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:layout_margin="1dp"
+        />
+    <RelativeLayout 
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_park_money"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        
+        <ImageView 
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:id="@+id/park_money"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/pub_payment_ic_balance"
+            />
+        <TextView 
+           
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/park_money"
+            android:gravity="center_vertical"
+            android:text="钱包"
+            android:textColor="#000000"
+            />
+        <TextView 
+            android:id="@+id/text_yu_money"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@id/park_money"
+      		android:textColor="@color/henhui"
+      		android:gravity="right|center_vertical"
+            android:text="0.0￥"
+            />
+    </RelativeLayout>
+    <View 
+        android:background="@color/henhui"
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:layout_margin="1dp"
+        />
+    
+   
+
+</LinearLayout>

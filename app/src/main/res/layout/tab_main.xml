@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="match_parent" >
+  	<include 
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        layout="@layout/title_layout"
+        android:layout_alignParentTop="true"
+        /> 
+
+    <LinearLayout
+        android:id="@+id/tab"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:orientation="horizontal">
+        
+        <LinearLayout
+            android:id="@+id/tab_zhuye"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            
+            <Button 
+                android:id="@+id/btn_zhuye"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableTop="@drawable/btn_selector_main"
+                android:text="开车"
+                android:textSize="10dp"
+                android:textColor="@color/henhui"
+                />
+            
+            
+         
+        </LinearLayout>
+<!--         <LinearLayout
+            android:id="@+id/tab_fujin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+             <Button 
+                 android:id="@+id/btn_fujin"
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableTop="@drawable/btn_selector_fujin"
+                android:text="附近"
+                android:textSize="10dp"
+                android:textColor="@color/henhui"
+                />
+        </LinearLayout> -->
+        <LinearLayout
+            android:id="@+id/tab_myinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+             
+            
+             <Button 
+                 android:id="@+id/btn_myinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableTop="@drawable/btn_selector_myinfo"  
+                android:text="个人"
+                android:textSize="10dp"
+                android:textColor="@color/henhui"
+                />
+            
+        </LinearLayout>
+        
+        
+    </LinearLayout>
+    <View 
+        android:id="@+id/xian"
+        android:background="@color/huise"
+        android:layout_above="@id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="1dp"
+        />
+    <RelativeLayout
+        android:layout_below="@+id/title"
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/xian" />
+    
+
+</RelativeLayout>

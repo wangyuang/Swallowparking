@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+      <EditText
+        android:id="@+id/item_edittext"  
+        android:layout_width="match_parent"  
+        android:layout_height="120px"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:digits="0123456789xyzXYZ"
+		android:inputType="number"  
+        android:background="@android:color/transparent"  
+        />  
+  
+    <LinearLayout 
+        android:id="@+id/ll"
+        android:padding="5dp"
+        android:layout_width="wrap_content"  
+        android:layout_height="120px"  
+        android:gravity="center"  
+        android:orientation="horizontal"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        >  
+  
+        <TextView  
+            android:id="@+id/item_code_iv1"  
+            style="@style/text_bind_car_first_editStyle"
+            android:layout_weight="1"/>  
+  
+        <TextView  
+            android:id="@+id/item_code_iv2"  
+            style="@style/text_bind_car_first_editStyle"
+            android:layout_weight="1" />  
+  
+        <TextView  
+            android:id="@+id/item_code_iv3"  
+          style="@style/text_bind_car_first_editStyle"
+            android:layout_weight="1"  />  
+  
+        <TextView  
+            android:id="@+id/item_code_iv4"  
+            style="@style/text_bind_car_first_editStyle"
+            android:layout_weight="1"  />  
+  
+        <TextView  
+            android:id="@+id/item_code_iv5"  
+            style="@style/text_bind_car_first_editStyle"
+            android:layout_weight="1"/>  
+  
+  
+        <TextView  
+            android:id="@+id/item_code_iv6"  
+          	style="@style/text_bind_car_first_editStyle"
+            android:layout_weight="1" />  
+  
+        <TextView  
+            android:id="@+id/item_code_iv7"  
+          style="@style/text_bind_car_first_editStyle"
+            android:layout_weight="1"  />  
+  
+        <TextView  
+            android:id="@+id/item_code_iv8"  
+            style="@style/text_bind_car_first_editStyle"
+           
+            android:layout_weight="1"  
+            android:visibility="gone"/>  
+    </LinearLayout>
+    
+ 
+      
+      <Button
+          android:layout_marginLeft="30dp"
+          android:layout_marginRight="30dp"
+          android:id="@+id/input_btn_que"
+          android:layout_width="fill_parent"
+          android:layout_height="45dp"
+          android:layout_marginTop="20dp"
+          android:enabled="false"
+          android:layout_below="@id/ll"
+          android:text="确认密码"
+          android:background="@drawable/btn_password_selector_bg"
+          android:textColor="#FFFFFF"
+          />
+
+</RelativeLayout>
