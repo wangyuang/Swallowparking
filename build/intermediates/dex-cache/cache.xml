@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\PaySDK\build\intermediates\bundles\default\libs\PaySDK-1.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="1166df60f0db42bcb80a318076e0b168f579a364">
+        <dex dex="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\app\build\intermediates\pre-dexed\debug\PaySDK-1.0.0_b6b193c69392d54bc9d43210c30ad61545955b20.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\PaySDK\build\intermediates\bundles\default\libs\libammsdk.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="75fb6772ed8fac36bd9107c813c8607b43351818">
+        <dex dex="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\app\build\intermediates\pre-dexed\debug\libammsdk_ac35fee8d0df7df0bbcab5b624439e8d88f537c2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\sMSSDK\build\intermediates\bundles\default\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="81e984bd2616737fd30cf12d4a643f7381a865b6">
+        <dex dex="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\app\build\intermediates\pre-dexed\debug\classes_99fb2c664f6e6e32ea15358ae4b3a30ea67869d7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\app\libs\zxing.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="96b67e377ff4637ff1fa3bbe9ad7183773935f39">
+        <dex dex="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\app\build\intermediates\pre-dexed\debug\zxing_5723d1a41975e0e2501013f4a98d69baf8e1e19c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\PaySDK\build\intermediates\bundles\default\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e650e5f4d5c8d5bfc5892b8bbadfb2689866de1e">
+        <dex dex="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\app\build\intermediates\pre-dexed\debug\classes_e5988fde70c6c8f1df85bd6e6d122adda9cfc95e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\sMSSDK\build\intermediates\bundles\default\libs\SMSSDK-3.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="072331b843f5fb6d46eacb9ebce222757241bd25">
+        <dex dex="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\app\build\intermediates\pre-dexed\debug\SMSSDK-3.1.1_60244cda32487e25010c79055d810f61b4cb4b8e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\sMSSDK\build\intermediates\bundles\default\libs\MobCommons-2018.0322.1145.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="785f2054cf23ddb16cd50fe56044f7520bc0e41e">
+        <dex dex="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\app\build\intermediates\pre-dexed\debug\MobCommons-2018.0322.1145_4fb7de9709ad11f687a0867be280ef3178139253.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\WYA\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\app\build\intermediates\pre-dexed\debug\gson-2.7_c14409e46565c8aed2969ce903bd9c741b5a47f4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\sMSSDK\build\intermediates\bundles\default\libs\SDKWrapper-2018.0201.1609.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="92129e261ad01e66b120680a141f4d11406ee2ac">
+        <dex dex="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\app\build\intermediates\pre-dexed\debug\SDKWrapper-2018.0201.1609_5fdd8271d76843bc16143167433a00ccb16f49ce.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\sMSSDK\build\intermediates\bundles\default\libs\MobTools-2018.0322.1147.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="877c82f0d7dffcd8cd2ef4ecdbc3f5f1fff540ce">
+        <dex dex="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\app\build\intermediates\pre-dexed\debug\MobTools-2018.0322.1147_79d98b77e0c966a50026ea4363eee7f7d19cc645.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\PaySDK\build\intermediates\bundles\default\libs\alipaySdk-20170725.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="83e507bfde7b744e7bee0bb68575275bf7112f95">
+        <dex dex="C:\Users\WYA\Desktop\daima\yinyong\Swallowparking\app\build\intermediates\pre-dexed\debug\alipaySdk-20170725_dedfcb66e10e5a631cc11604f016c160c9f3f0e0.jar" />
+    </item>
+
+</items>
