@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 import cn.edu.zzti.soft.R;
 import cn.edu.zzti.soft.entity.Person;
 import cn.edu.zzti.soft.entity.ResultJSONBean;
+import cn.edu.zzti.soft.entity.registeRequest;
 import cn.edu.zzti.soft.view.MyEditView;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -120,7 +121,11 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS).writeTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS).build();
+                        registeRequest request= new registeRequest(edit_tel.getText().toString());
+                        checkPhone();
+
+
+                      /*  OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS).writeTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS).build();
                         //实体类(用户的实体类,字段要与数据库中的字段一致),因为不知道后台数据库表格设计,在这里先不写,暂时使用以前的person实体类
                         //登录只需要验证用户名和密码是否正确即可
                         Person person = new Person();
@@ -130,7 +135,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                         Gson gson = new Gson();
                         String json = gson.toJson(person); //括号中应填实体类的变量名
                         RequestBody requestbody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), json);
-                        String url = "http://10.133.112.75:8080/Yuang_Client_Server_Data_Exchange/test?action=register";//要填写后台的访问路径
+                        String url = "http://10.133.1.148:8080/Yuang_Client_Server_Data_Exchange/test?action=register";//要填写后台的访问路径
                         Request request = new Request.Builder().url(url).post(requestbody).build();
                         Response response=null;
                         try {
@@ -158,19 +163,11 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
-                        }
-
-
+                        }*/
                     }
                 }).start();
-
-
             }
         }
-
-
-
-
     }
 
     private String getNowTime() {

@@ -55,7 +55,7 @@ public class NewuserActivity extends Activity {
     private void initListener(){
         tg.setOnClickListener(new View.OnClickListener() {
             SharedPreferences pref=getSharedPreferences("phone",MODE_PRIVATE);
-            String token=pref.getString("token","");
+            String token=pref.getString("tokenResponseJson","");
             @Override
             public void onClick(View v) {
                 if (!token.equals("")) {
