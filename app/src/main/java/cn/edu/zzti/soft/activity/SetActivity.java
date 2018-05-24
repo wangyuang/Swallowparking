@@ -56,7 +56,7 @@ public class SetActivity extends Activity implements View.OnClickListener{
             case R.id.btn_tuichu:
                // lq.savePass("");
                 SharedPreferences.Editor editor=getSharedPreferences("phone",MODE_PRIVATE).edit();
-                editor.remove("tokenResponseJson");
+                editor.remove("realToken");
                 editor.apply();
 
                 Intent intent = new Intent(SetActivity.this,LoginActivity.class)
