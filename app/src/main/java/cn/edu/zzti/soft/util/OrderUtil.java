@@ -1,14 +1,11 @@
 package cn.edu.zzti.soft.util;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import com.mob.tools.utils.Data;
+
 import com.mob.tools.utils.Hashon;
 import com.mob.tools.utils.SharePrefrenceHelper;
 import java.util.ArrayList;
 import java.util.List;
-
-import cn.edu.zzti.soft.activity.OrderRecord;
 
 public class OrderUtil extends Object {
 

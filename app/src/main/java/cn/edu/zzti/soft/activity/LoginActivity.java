@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,10 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
+
 import cn.edu.zzti.soft.R;
-import cn.edu.zzti.soft.entity.Person;
-import cn.edu.zzti.soft.entity.ResultJSONBean;
 import cn.edu.zzti.soft.entity.registeRequest;
 import cn.edu.zzti.soft.util.OkHttpUtil;
 import cn.edu.zzti.soft.util.URLAddress;
@@ -34,15 +31,8 @@ import cn.edu.zzti.soft.view.MyEditView;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import okhttp3.Call;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
-import static cn.edu.zzti.soft.R.id.btn_login;
-import static cn.edu.zzti.soft.R.id.edit_phone;
-import static cn.edu.zzti.soft.R.id.edit_pwd;
-import static cn.edu.zzti.soft.R.id.edit_tel;
+
 import static cn.edu.zzti.soft.R.id.edit_yzm;
 
 /**
@@ -291,7 +281,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     public void SavePhone(){
         SharedPreferences.Editor editor=getSharedPreferences("phone",MODE_PRIVATE).edit();
         editor.putString("phone",edit_phone.getText().toString());
-        editor.putString("realtoken",realToken);
+        editor.putString("realToken",realToken);
         editor.apply();
     }
 
@@ -360,7 +350,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         handler1.sendEmptyMessage(4);
                         Log.d("11","密码错误");
                     }else if("200".equals(code)&&"成功".equals(msg)){
-                        SavePhone();
                         JSONObject data=jsonObject.getJSONObject("data");
                         JSONObject token=data.getJSONObject("token");
                         JSONObject userDetail=data.getJSONObject("userDetail");
@@ -378,6 +367,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         String email=userDetail.getString("email");
                         String tempToken=token.getString("tempToken");
                         realToken=token.getString("realToken");
+                        SavePhone();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class)
                                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);

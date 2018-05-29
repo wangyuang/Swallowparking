@@ -17,7 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import cn.edu.zzti.soft.R;
 import cn.edu.zzti.soft.activity.ChongZhiActivity;
-import cn.edu.zzti.soft.activity.PayMainActivity;
 import cn.edu.zzti.soft.data.LQPreferences;
 import cn.edu.zzti.soft.zxing.ui.MipcaActivityCapture;
 

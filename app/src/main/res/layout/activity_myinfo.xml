@@ -4,9 +4,6 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical" >
-    
-    
-    
     <include
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -36,7 +33,6 @@
             android:layout_toRightOf="@id/tv_temp_name"
            	android:text="XXX"
             android:gravity="right"
-            
             android:textColor="#AAAAAA"
             android:textSize="16sp" />
     </RelativeLayout>
@@ -67,7 +63,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:layout_toRightOf="@id/tv_temp_phone"
-           	android:text="0000000000000000"
+           	android:text="XXX"
             android:gravity="right"
             android:textColor="#AAAAAA"
             android:textSize="16sp" />
@@ -87,50 +83,50 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:text="性别"
-            android:textColor="#353535"
-            android:textSize="16sp" />
+         android:text="性别"
+         android:textColor="#353535"
+         android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tv_sex"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:layout_toRightOf="@id/tv_temp_sex"
-           	android:text="男"
+         <TextView
+             android:id="@+id/tv_sex"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_centerVertical="true"
+             android:layout_marginRight="20dp"
+             android:layout_toRightOf="@id/tv_temp_sex"
+             android:text="XXX"
             android:gravity="right"
             android:textColor="#AAAAAA"
             android:textSize="16sp" />
 
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/re_loaction"
+        android:id="@+id/re_email"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:clickable="true" >
 
         <TextView
-            android:id="@+id/tv_temp_loaction"
+            android:id="@+id/tv_temp_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:text="地区"
+            android:text="邮箱"
             android:textColor="#353535"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tv_loaction"
+            android:id="@+id/tv_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:layout_toRightOf="@id/tv_temp_loaction"
-           	android:text="河南"
+            android:layout_toRightOf="@id/tv_temp_email"
+           	android:text="XXX"
             android:gravity="right"
             android:textColor="#AAAAAA"
             android:textSize="16sp" />
