@@ -9,35 +9,24 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
-
+import okhttp3.Call;
+import okhttp3.Response;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
+import java.util.HashMap;
+import java.util.Map;
 import cn.edu.zzti.soft.R;
-import cn.edu.zzti.soft.entity.Person;
-import cn.edu.zzti.soft.entity.ResultJSONBean;
 import cn.edu.zzti.soft.entity.registeRequest;
+import cn.edu.zzti.soft.util.OkHttpUtil;
+import cn.edu.zzti.soft.util.URLAddress;
 import cn.edu.zzti.soft.view.MyEditView;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
-import static cn.edu.zzti.soft.R.id.btn_login;
-import static cn.edu.zzti.soft.R.id.btn_yzm;
-import static cn.edu.zzti.soft.R.id.edit_phone;
-import static cn.edu.zzti.soft.R.id.edit_pwd;
-import static cn.edu.zzti.soft.R.id.edit_yzm;
-
 public class RegisterActivity extends Activity implements View.OnClickListener {
 
     private MyEditView edit_tel;
@@ -57,6 +46,12 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         edit_tel.addTextChangedListener(new MyTextWatcher(edit_tel));
         edit_pwd.addTextChangedListener(new MyTextWatcher(edit_pwd));
         edit_ensurepwd.addTextChangedListener(new MyTextWatcher(edit_ensurepwd));
+
+        if (judgePhoneNumber(edit_tel.getText().toString())) {
+            btn_registeruser.setEnabled(true);
+        }else{
+            btn_registeruser.setEnabled(false);
+        }
     }
 
     @Override
@@ -87,6 +82,13 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                     break;*/
                 case 1:
                     Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    Toast.makeText(RegisterActivity.this,"注册失败,请重试",Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    Toast.makeText(RegisterActivity.this,"连接服务器失败,请重试",Toast.LENGTH_SHORT).show();
+                    break;
                 default:
                     break;
 
@@ -122,9 +124,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                     @Override
                     public void run() {
                         registeRequest request= new registeRequest(edit_tel.getText().toString());
-                        checkPhone();
-
-
+                        checkPhone(request);
                       /*  OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS).writeTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS).build();
                         //实体类(用户的实体类,字段要与数据库中的字段一致),因为不知道后台数据库表格设计,在这里先不写,暂时使用以前的person实体类
                         //登录只需要验证用户名和密码是否正确即可
@@ -168,6 +168,81 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                 }).start();
             }
         }
+    }
+
+    public void registe(registeRequest request) {
+        String url = URLAddress.getRegisteURL();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("phone", request.getPhone());
+        map.put("password", request.getPassword() );
+
+        OkHttpUtil.post(url, new okhttp3.Callback() {
+            public void onFailure(Call arg0, IOException arg1) {
+                // TODO Auto-generated method stub
+                // 提示错误
+                Log.i("registe()","onFailure");
+                handler1.sendEmptyMessage(2);
+            }
+
+            public void onResponse(Call arg0, Response response)
+                    throws IOException {
+               // Log.i("info",response.body().string() );
+                //下面解析JSON，处理
+                String result=response.body().string();
+                try {
+                    JSONObject jsonObject =new JSONObject(result);
+                    String code=jsonObject.getString("code");
+                    String msg=jsonObject.getString("msg");
+                    if("200".equals(code)&&"成功".equals(msg)){
+                        handler1.sendEmptyMessage(1);
+                        SavePhone();
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }else{
+                        handler1.sendEmptyMessage(2);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, map);
+    }
+
+    public void checkPhone(registeRequest request) {
+        String url = URLAddress.getCheckPhone();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("phone", request.getPhone());
+        OkHttpUtil.get(url, new okhttp3.Callback() {
+            public void onFailure(Call arg0, IOException arg1) {
+                // TODO Auto-generated method stub
+                // 提示错误
+                Log.i("checkPhone()","onFailure");
+                handler1.sendEmptyMessage(3);
+            }
+
+            public void onResponse(Call arg0, Response response)
+                    throws IOException {
+                //Log.i("info",response.body().string() );
+                //下面解析JSON，处理
+                String result=response.body().string();
+                try {
+                    JSONObject  jsonObject=new JSONObject(result);
+                    JSONObject data=jsonObject.getJSONObject("data");
+                    Boolean exists=data.getBoolean("exists");
+                    if(true==exists){
+                        handler1.sendEmptyMessage(0);
+                    }else{
+                        registeRequest request=new registeRequest(edit_tel.getText().toString(),edit_pwd.getText().toString());
+                        registe(request);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, map);
+
     }
 
     private String getNowTime() {

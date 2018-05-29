@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -16,14 +18,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Map;
 import java.util.UUID;
 
 import cn.edu.zzti.soft.R;
+import cn.edu.zzti.soft.entity.Order;
+import cn.edu.zzti.soft.entity.PayResult;
 import cn.edu.zzti.soft.util.ClsUtils;
 import cn.edu.zzti.soft.util.GXCWUtil;
+
+import static cn.edu.zzti.soft.R.id.pub_money;
+import static cn.edu.zzti.soft.zxing.ui.MipcaActivityCapture.resultString;
 
 /**
  * Created by WYA on 2018/5/1.
@@ -59,6 +69,8 @@ public class UnlockActivity extends Activity implements View.OnClickListener{
     private ImageView title_img;
     private TextView title_name;
 
+    private static final int SDK_PAY_FLAG = 1;
+
     private BluetoothAdapter _bluetooth = BluetoothAdapter.getDefaultAdapter();    //获取本地蓝牙适配器，即蓝牙设备
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +98,7 @@ public class UnlockActivity extends Activity implements View.OnClickListener{
         btn_zf = (Button) findViewById(R.id.btn_zf);
         pak_name = (TextView) findViewById(R.id.pub_number);
         pak_time =(TextView)findViewById(R.id.pub_time);
-        pak_money = (TextView)findViewById(R.id.pub_money);
+        pak_money = (TextView)findViewById(pub_money);
         btn_zf.setOnClickListener(this);
     }
 
@@ -274,6 +286,34 @@ public class UnlockActivity extends Activity implements View.OnClickListener{
     };
 
 
+    Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SDK_PAY_FLAG: {
+                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
+                    /**
+                     对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
+                     */
+                    String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+                    String resultStatus = payResult.getResultStatus();
+                    // 判断resultStatus 为9000则代表支付成功
+                    if (TextUtils.equals(resultStatus, "9000")) {
+                        // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                        Toast.makeText(UnlockActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                        //以下处请书写跳转到成功后的界面
+                        onSend(GXCWUtil.SEND_BLUETHOOTH);
+
+                    } else {
+                        // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
+                        Toast.makeText(UnlockActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                }
+            }
+        };
+    };
+
+
     private byte[] getHexBytes(String message) {
         int len = message.length() / 2;
         char[] chars = message.toCharArray();
@@ -306,7 +346,27 @@ public class UnlockActivity extends Activity implements View.OnClickListener{
                  *
                  *
                  * */
-                onSend(GXCWUtil.SEND_BLUETHOOTH);
+                new  Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        double account = Double.parseDouble( pak_money.getText().toString());
+                        Order order = new Order( MyInfoActivity.realToken ,account );
+                        final String orderInfo = order.getOrderInfo();   // 订单信息,凭证
+                        if( orderInfo.length() > 0   ){
+                            PayTask alipay = new PayTask(UnlockActivity.this);
+                            Map<String, String> result = alipay.payV2(orderInfo,true);
+                            Message msg = new Message();
+                            msg.what = SDK_PAY_FLAG;
+                            msg.obj = result;
+                            mHandler.sendMessage(msg);
+                        }
+                        else{
+                            Log.i("PayActivity","订单凭证获得失败！" );
+                        }
+                    }
+                }).start();
+
+                //onSend(GXCWUtil.SEND_BLUETHOOTH);
                 break;
             case R.id.title_img:
                 Intent intent = new Intent(UnlockActivity.this,MainActivity.class)

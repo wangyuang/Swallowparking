@@ -1,5 +1,4 @@
 package cn.edu.zzti.soft.activity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,27 +14,25 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import java.util.HashMap;
+import java.util.Map;
 
 import cn.edu.zzti.soft.R;
-import cn.edu.zzti.soft.entity.Person;
-import cn.edu.zzti.soft.entity.ResultJSONBean;
+import cn.edu.zzti.soft.entity.registeRequest;
+import cn.edu.zzti.soft.util.OkHttpUtil;
+import cn.edu.zzti.soft.util.URLAddress;
 import cn.edu.zzti.soft.view.MyEditView;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
+import okhttp3.Call;
 import okhttp3.Response;
 
-import static cn.edu.zzti.soft.R.id.btn_login;
-import static cn.edu.zzti.soft.R.id.edit_phone;
 import static cn.edu.zzti.soft.R.id.edit_yzm;
 
 /**
@@ -72,36 +69,37 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     // 两次按下的时间间隔
     private final long INTERVAL = 2000;
 
-    String token;
+    String realToken;
 
     private Handler handler1=new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case 0:
-                    Toast.makeText(LoginActivity.this,"请检查账号密码是否正确或该该账户未注册",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"该账号未注册,请注册",Toast.LENGTH_SHORT).show();
                     break;
                 case 1:
                     SharedPreferences pref=getSharedPreferences("phone",MODE_PRIVATE);
                     phone=pref.getString("phone","");
                     edit_phone.setText(phone);
                     break;
-
+                case 2:
+                    Toast.makeText(LoginActivity.this,"登录失败,请重试",Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    Toast.makeText(LoginActivity.this,"连接服务器失败,请重试",Toast.LENGTH_SHORT).show();
+                    break;
+                case 4:
+                    Toast.makeText(LoginActivity.this,"密码输入错误",Toast.LENGTH_SHORT).show();
                 default:
                     break;
-
             }
-
-
         }
     };
 
-
     private Handler handler = new Handler() {
-
         @Override
         public void handleMessage(Message msg) {
-
             if (msg.what == -1) {
                 b_yzm = false;
                 btn_yzm.setText("重新发送（" + time + "）");
@@ -122,10 +120,14 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         // 提交验证码成功
                        // Toast.makeText(LoginActivity.this, "提交验证码成功", Toast.LENGTH_SHORT).show();
                         Log.d("success", "成功");
+                       new Thread(new Runnable() {
+                           @Override
+                           public void run() {
+                               registeRequest request=new registeRequest(edit_phone.getText().toString());
+                               checkPhone(request);
+                           }
+                       }).start();
 
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class)
-                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
                        /* if (p_dao.getPerson(phone) == false) {
 
                             Intent intent = new Intent(LoginActivity.this, PasswordActivity.class)
@@ -146,7 +148,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         ((Throwable) data).printStackTrace();
                     }
                 }
-
             }
         }
     };
@@ -219,7 +220,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             btn_yzm.setEnabled(true);
         }
 
-
         // 验证验证码是否正确
         EventHandler eventHandler = new EventHandler() {
             // 在回调对象被注册的时候被调用
@@ -281,23 +281,119 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     public void SavePhone(){
         SharedPreferences.Editor editor=getSharedPreferences("phone",MODE_PRIVATE).edit();
         editor.putString("phone",edit_phone.getText().toString());
-        editor.putString("tokenResponseJson",token);
+        editor.putString("realToken",realToken);
         editor.apply();
+    }
+
+    public void checkPhone(registeRequest request) {
+        String url = URLAddress.getCheckPhone();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("phone", request.getPhone());
+        OkHttpUtil.get(url, new okhttp3.Callback() {
+            public void onFailure(Call arg0, IOException arg1) {
+                // TODO Auto-generated method stub
+                // 提示错误
+                Log.i("checkPhone()","onFailure");
+                handler1.sendEmptyMessage(3);
+            }
+
+            public void onResponse(Call arg0, Response response)
+                    throws IOException {
+                //Log.i("info",response.body().string() );
+                //下面解析JSON，处理
+                String result=response.body().string();
+                try {
+                    JSONObject jsonObject=new JSONObject(result);
+                    JSONObject data=jsonObject.getJSONObject("data");
+                    Boolean exists=data.getBoolean("exists");
+                    if(true==exists){
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }else{
+                        handler1.sendEmptyMessage(0);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, map);
+    }
+
+    public void login( registeRequest request ) {
+        String url = URLAddress.getLoginURL();
+        Map<String,String> map = new HashMap<String, String>();
+        map.put("phone", request.getPhone());
+        map.put("password", request.getPassword() );
+
+        OkHttpUtil.post(url, new okhttp3.Callback() {
+            public void onFailure(Call arg0, IOException arg1) {
+                // TODO Auto-generated method stub
+                // 提示错误
+                Log.i("login()","onFailure");
+                handler1.sendEmptyMessage(2);
+            }
+
+            public void onResponse(Call arg0, Response response) throws IOException {
+              //  Log.i("info",response.body().string() );
+                //下面解析JSON，处理
+                String result=response.body().string();
+                try {
+                    JSONObject jsonObject =new JSONObject(result);
+                    String code=jsonObject.getString("code");
+                    String msg=jsonObject.getString("msg");
+
+                    if("500".equals(code)&&"用户未注册".equals(msg)){
+                        handler1.sendEmptyMessage(0);
+                        Log.d("11","用户未注册");
+                    }else if("500".equals(code)&&"密码错误".equals(msg)){
+                        handler1.sendEmptyMessage(4);
+                        Log.d("11","密码错误");
+                    }else if("200".equals(code)&&"成功".equals(msg)){
+                        JSONObject data=jsonObject.getJSONObject("data");
+                        JSONObject token=data.getJSONObject("token");
+                        JSONObject userDetail=data.getJSONObject("userDetail");
+                        String uid=userDetail.getString("uid");
+                        String name=userDetail.getString("name");
+                        String nick=userDetail.getString("nick");
+                        String registTime=userDetail.getString("registTime");
+                        String portrait=userDetail.getString("portrait");
+                        String intro=userDetail.getString("intro");
+                        String gender=userDetail.getString("gender");
+                        String phone=userDetail.getString("phone");
+                        String password=userDetail.getString("password");
+                        String status=userDetail.getString("status");
+                        String label=userDetail.getString("label");
+                        String email=userDetail.getString("email");
+                        String tempToken=token.getString("tempToken");
+                        realToken=token.getString("realToken");
+                        SavePhone();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },map);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
-
-                SMSSDK.submitVerificationCode("86", phone, edit_yzm_password.getText()
-                        .toString());
-                Log.d("sdsdsdssdsd", "ssssssssssss");
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        /*OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS).writeTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS).build();
+               if(btn_yzm.getVisibility()!=View.GONE){
+                    SMSSDK.submitVerificationCode("86", phone, edit_yzm_password.getText()
+                            .toString());
+                }else {
+                   new Thread(new Runnable() {
+                       @Override
+                       public void run() {
+                           registeRequest request = new registeRequest(edit_phone.getText().toString(), edit_yzm_password.getText().toString());
+                           login(request);
+                       /* OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS).writeTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS).build();
                         //实体类(用户的实体类,字段要与数据库中的字段一致),因为不知道后台数据库表格设计,在这里先不写,暂时使用以前的person实体类
                         //登录只需要验证用户名和密码是否正确即可
                         Person person = new Person();
@@ -335,8 +431,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }*/
-                    }
-                }).start();
+                       }
+                   }).start();
+               }
 
 
               /*  if (flag != true) {

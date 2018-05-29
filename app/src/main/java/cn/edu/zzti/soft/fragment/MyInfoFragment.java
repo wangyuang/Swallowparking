@@ -29,6 +29,8 @@ import cn.edu.zzti.soft.activity.MyInfoActivity;
 import cn.edu.zzti.soft.activity.SetActivity;
 import cn.edu.zzti.soft.dao.impl.PersonDao;
 import cn.edu.zzti.soft.data.LQPreferences;
+
+
 /**
  * 个人界面
  * 
@@ -40,15 +42,15 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
 	private LinearLayout ll_qianbao_layout;
 	private LinearLayout ll_xiugaimima_layout;
 	private LinearLayout ll_set_layout;
-	
+
 	private View view;
-	
+
 	private Context context;
 	private LQPreferences lq ;
     private PersonDao persondao ;
 	// 图片的数据
 	private	ByteArrayOutputStream baos;
-	
+
 	private String imageName;
 	private String phone;
     private static final int PHOTO_REQUEST_TAKEPHOTO = 1;// 拍照
@@ -57,8 +59,8 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
     private static final int UPDATE_FXID = 4;
     private static final int UPDATE_NICK = 5;
     private static final int UPDATE_SIGN = 6;
-    
     private static final String fileName ="/sdcard/gxcw/";
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		context = getActivity();
@@ -67,7 +69,6 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
 		view = inflater.inflate(R.layout.fragment_myinfo, container, false);
 		init();
 		listener();
-		
 		return view;
 	}
 	
@@ -79,7 +80,6 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
 		if(phone!=null){
 			byte[] dataImage =persondao.readImage(phone);
 			if(dataImage!=null){
-				
 				Bitmap bitmap = BitmapFactory.decodeByteArray(dataImage, 0, dataImage.length);
 				imgview.setImageBitmap(bitmap);
 			}
@@ -192,17 +192,16 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
 	
 	@Override
 	public void onClick(View v) {
-		
-		
 		switch (v.getId()) {
 		case R.id.myinfo_img:
 			createdialog();
 			break;
 		case R.id.gerenxinxi_layout:
-			
+
+			//seeUserDetail();
 			Intent intent = new Intent(context, MyInfoActivity.class);
-			context.startActivity(intent);
-			
+			startActivity(intent);
+
 			break;
 		case R.id.qianbao_layout:
 			break;
@@ -216,11 +215,10 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
 			break;
 		}
 	}
-	
+
 	private String getNowTime() {
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMddHHmmss");
         return dateFormat.format(date);
    }
-
 }

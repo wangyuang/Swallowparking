@@ -1,3 +1,3 @@
-include ':app', ':PaySDK'
+include ':app'
 include ':sMSSDK'
 include ':shortMessageSDKGUI'

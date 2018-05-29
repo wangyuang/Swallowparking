@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
-import cn.edu.zzti.soft.activity.PayMainActivity;
 import cn.edu.zzti.soft.zxing.camera.CameraManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -100,12 +98,13 @@ public class MipcaActivityCapture extends Activity implements SurfaceHolder.Call
 			return;
 		}
 
-		Intent intent = new Intent(MipcaActivityCapture.this,PayMainActivity.class);
-		/*Bundle bundle = new Bundle();
+		Intent intent = new Intent(MipcaActivityCapture.this,UnlockActivity.class);
+
+		Bundle bundle = new Bundle();
 
 		bundle.putString("result", resultString);
 
-		intent.putExtras(bundle);*/
+		intent.putExtras(bundle);
 		this.startActivity(intent);
 	}
 
