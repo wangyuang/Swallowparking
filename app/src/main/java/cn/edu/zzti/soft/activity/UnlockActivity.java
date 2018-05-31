@@ -350,7 +350,7 @@ public class UnlockActivity extends Activity implements View.OnClickListener{
                     @Override
                     public void run() {
                         double account = Double.parseDouble( pak_money.getText().toString());
-                        Order order = new Order( MyInfoActivity.realToken ,account );
+                        Order order = new Order( LoginActivity.realToken ,account );
                         final String orderInfo = order.getOrderInfo();   // 订单信息,凭证
                         if( orderInfo.length() > 0   ){
                             PayTask alipay = new PayTask(UnlockActivity.this);

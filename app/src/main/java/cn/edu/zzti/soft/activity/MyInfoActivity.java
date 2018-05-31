@@ -48,13 +48,13 @@ public class MyInfoActivity extends Activity implements View.OnClickListener {
 	public String myphone;
 	public  String email;
     public String sex;
-	public  static String realToken;
+	public   String realToken;
 
 //    PersonDaoImpl person;
 //    LQPreferences lq =null;
 //    Person p =null;
 
-    public void getRealToken(){
+    public  void getRealToken(){
 	SharedPreferences pref=getSharedPreferences("phone",MODE_PRIVATE);
 	realToken=pref.getString("realToken","");
 }
@@ -177,11 +177,12 @@ public class MyInfoActivity extends Activity implements View.OnClickListener {
 //        super.onStart();
 //    }
 
+
 public void seeUserDetail() {
 		String url = URLAddress.getuserDetail();
         getRealToken();
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("realToken", realToken);
+
 		OkHttpUtil.postRequestHeader(url, new okhttp3.Callback() {
 			public void onFailure(Call arg0, IOException arg1) {
 				// TODO Auto-generated method stub
@@ -231,9 +232,7 @@ public void seeUserDetail() {
 					e.printStackTrace();
 				}
 			}
-		}
-		//, map
-		);
+		}, map);
 	}
 
     private void init(){

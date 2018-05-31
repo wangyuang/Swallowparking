@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:background="#ffffff"
     android:layout_height="match_parent" >
-    
-    
+
+
     <LinearLayout
         android:id="@+id/ll"
-        android:layout_margin="20dp" 
+        android:layout_margin="20dp"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -20,39 +20,39 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:hint="手机号"/>
-        <View 
+        <View
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
             android:background="@color/henhui"
             android:layout_margin="1dp"
             />
-        <LinearLayout 
+        <LinearLayout
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
             <LinearLayout
-                android:layout_weight="0.5" 
+                android:layout_weight="0.5"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                
-		        <cn.edu.zzti.soft.view.MyEditView
-		            android:background="@null"
-		            android:id="@+id/edit_yzm"
-		            android:layout_width="match_parent"
-		            android:layout_height="43dp"
-		            android:inputType="textPassword"
-	            />
-		        <View 
-		            
-		            android:layout_width="match_parent"
-		            android:layout_height="0.1dp"
-		            android:background="@color/henhui"
-		            android:layout_margin="1dp"
-		            />
+
+                <cn.edu.zzti.soft.view.MyEditView
+                    android:background="@null"
+                    android:id="@+id/edit_yzm"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:inputType="textPassword"
+                    />
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@color/henhui"
+                    android:layout_margin="1dp"
+                    />
             </LinearLayout>
-            <Button 
+            <Button
                 android:id="@+id/btn_yzm"
                 android:enabled="false"
                 android:layout_weight="1"
@@ -61,7 +61,7 @@
                 android:text="获取验证码"
                 android:textSize="12dp"
                 android:textColor="#ffffff"
-            	android:background="@drawable/btn_password_selector_bg"
+                android:background="@drawable/btn_password_selector_bg"
                 android:visibility="gone"
                 />
         </LinearLayout>
@@ -75,7 +75,7 @@
             android:background="@drawable/btn_password_selector_bg"
             android:text="登  录"
             />
-        
+
     </LinearLayout>
     <RelativeLayout
         android:layout_below="@id/ll"
@@ -118,9 +118,9 @@
             android:background="@null"
             android:text="短信验证码登录"
             />
-        
+
     </RelativeLayout>
-    
+
     <cn.edu.zzti.soft.zxing.view.RoundView
         android:id="@+id/img"
         android:layout_centerHorizontal="true"
@@ -129,6 +129,6 @@
         android:layout_height="80dp"
         android:scaleType="centerCrop"
         android:src="@drawable/p"/>
-    
+
 
 </RelativeLayout>

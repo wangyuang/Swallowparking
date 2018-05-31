@@ -2,7 +2,9 @@ package cn.edu.zzti.soft.activity;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +36,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     // 两次按下的时间间隔
     private final long INTERVAL = 2000;
 
+    public static String  realToken;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -51,7 +55,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         initView();
         toast=Toast.makeText(MainActivity.this,"再按一次退出程序",Toast.LENGTH_SHORT);
+
+        getRealToken();
+
     }
+
+    public  void getRealToken(){
+        SharedPreferences pref=getSharedPreferences("phone",MODE_PRIVATE);
+        realToken=pref.getString("realToken","");
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -129,5 +142,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //		}
         return super.onTouchEvent(event);
     }
+
+
 }
 

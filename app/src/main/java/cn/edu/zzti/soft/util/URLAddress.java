@@ -13,6 +13,7 @@ public class URLAddress {
     static String  login = "auth/login";
     static String  checkPhone =	"check/phone";  //验证手机号是否注册
     static String  userDetail="user/detail"; //查看用户信息
+    static String updatepwd="auth/update/password"; //修改用户密码
 
     //订单支付相关
     static String create =  "order/create" ;  //创建订单
@@ -48,4 +49,7 @@ public class URLAddress {
     public static String getuserDetail(){
         return sPreURL+userDetail;
     }
+
+    public static String getupdatePwd(){ return sPreURL+updatepwd; }
+
 }

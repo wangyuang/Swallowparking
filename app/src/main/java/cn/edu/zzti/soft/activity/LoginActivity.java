@@ -52,10 +52,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     private String phone;
     private String yzm;
-    private String password;
+    private  String password;
 
     //private LQPreferences lq;
-   //private PersonDao p_dao;
+    //private PersonDao p_dao;
     private boolean flag = true;
     private boolean b_yzm = false;
     private int time = 30;
@@ -69,7 +69,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     // 两次按下的时间间隔
     private final long INTERVAL = 2000;
 
-    String realToken;
+    public static String  realToken;
+
 
     private Handler handler1=new Handler(){
         @Override
@@ -118,15 +119,15 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                         // 校验验证码，返回校验的手机和国家代码
                         // 提交验证码成功
-                       // Toast.makeText(LoginActivity.this, "提交验证码成功", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(LoginActivity.this, "提交验证码成功", Toast.LENGTH_SHORT).show();
                         Log.d("success", "成功");
-                       new Thread(new Runnable() {
-                           @Override
-                           public void run() {
-                               registeRequest request=new registeRequest(edit_phone.getText().toString());
-                               checkPhone(request);
-                           }
-                       }).start();
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                registeRequest request=new registeRequest(edit_phone.getText().toString());
+                                checkPhone(request);
+                            }
+                        }).start();
 
                        /* if (p_dao.getPerson(phone) == false) {
 
@@ -324,8 +325,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         String url = URLAddress.getLoginURL();
         Map<String,String> map = new HashMap<String, String>();
         map.put("phone", request.getPhone());
-        map.put("password", request.getPassword() );
-
+        map.put("password",request.getPassword());
         OkHttpUtil.post(url, new okhttp3.Callback() {
             public void onFailure(Call arg0, IOException arg1) {
                 // TODO Auto-generated method stub
@@ -335,7 +335,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             }
 
             public void onResponse(Call arg0, Response response) throws IOException {
-              //  Log.i("info",response.body().string() );
+                //  Log.i("info",response.body().string() );
                 //下面解析JSON，处理
                 String result=response.body().string();
                 try {
@@ -368,6 +368,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         String tempToken=token.getString("tempToken");
                         realToken=token.getString("realToken");
                         SavePhone();
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class)
                                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
@@ -384,15 +385,15 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
-               if(btn_yzm.getVisibility()!=View.GONE){
+                if(btn_yzm.getVisibility()!=View.GONE){
                     SMSSDK.submitVerificationCode("86", phone, edit_yzm_password.getText()
                             .toString());
                 }else {
-                   new Thread(new Runnable() {
-                       @Override
-                       public void run() {
-                           registeRequest request = new registeRequest(edit_phone.getText().toString(), edit_yzm_password.getText().toString());
-                           login(request);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            registeRequest request = new registeRequest(edit_phone.getText().toString(), edit_yzm_password.getText().toString());
+                            login(request);
                        /* OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS).writeTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS).build();
                         //实体类(用户的实体类,字段要与数据库中的字段一致),因为不知道后台数据库表格设计,在这里先不写,暂时使用以前的person实体类
                         //登录只需要验证用户名和密码是否正确即可
@@ -431,9 +432,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }*/
-                       }
-                   }).start();
-               }
+                        }
+                    }).start();
+                }
 
 
               /*  if (flag != true) {

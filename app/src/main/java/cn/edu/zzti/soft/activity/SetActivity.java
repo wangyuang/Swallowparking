@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import cn.edu.zzti.soft.R;
 import cn.edu.zzti.soft.data.LQPreferences;
+import cn.edu.zzti.soft.fragment.MyInfoFragment;
 
 import static android.R.id.edit;
 
@@ -24,6 +25,7 @@ public class SetActivity extends Activity implements View.OnClickListener{
     private TextView text_name;
 
     private Button btn_tui;
+    private Button btn_updatepwd;
 
     //private LQPreferences lq = new LQPreferences();
     @Override
@@ -41,6 +43,7 @@ public class SetActivity extends Activity implements View.OnClickListener{
         image_title = (ImageView)findViewById(R.id.title_img);
         text_name = (TextView)findViewById(R.id.title_name);
         btn_tui = (Button)findViewById(R.id.btn_tuichu);
+        btn_updatepwd=(Button)findViewById(R.id.btn_updatepwd);
         image_title.setImageResource(R.drawable.fx_icon_back_n);
         text_name.setText("设置");
 
@@ -48,6 +51,14 @@ public class SetActivity extends Activity implements View.OnClickListener{
     private void  listener(){
         image_title.setOnClickListener(this);
         btn_tui.setOnClickListener(this);
+        btn_updatepwd.setOnClickListener(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SetActivity.this, MainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     @Override
@@ -64,6 +75,11 @@ public class SetActivity extends Activity implements View.OnClickListener{
                 Intent intent = new Intent(SetActivity.this,LoginActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                break;
+            case R.id.btn_updatepwd:
+                Intent intent1 = new Intent(SetActivity.this,EditPasswordActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent1);
                 break;
             case R.id.title_img:
                 finish();

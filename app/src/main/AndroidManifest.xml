@@ -82,6 +82,7 @@
             android:value="05d7b480da6ba9097c6f6c9faf095e78" />
 -->
         <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.EditPasswordActivity"></activity>
 
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
@@ -97,6 +98,7 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
+
     </application>
 
 </manifest>

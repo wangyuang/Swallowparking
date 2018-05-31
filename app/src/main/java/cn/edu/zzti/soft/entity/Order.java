@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.edu.zzti.soft.activity.LoginActivity;
 import cn.edu.zzti.soft.activity.MyInfoActivity;
 import cn.edu.zzti.soft.util.OkHttpUtil;
 import cn.edu.zzti.soft.util.URLAddress;
@@ -55,10 +56,10 @@ public class Order {
     private void httpCreateOrder() {
         String url = URLAddress.getOrderCreate();
         Map<String, String> mapHeader = new HashMap<String, String>();
-        mapHeader.put("realToken", MyInfoActivity.realToken);
+        mapHeader.put("realToken", LoginActivity.realToken);
         Map<String, String> map = new HashMap<String, String>();
         map.put("amount", String.valueOf(this.amount));
-        map.put("realToken", MyInfoActivity.realToken);
+        map.put("realToken", LoginActivity.realToken);
 
         Response response = OkHttpUtil.getWithHeaderSync(url, map, mapHeader);
         String s = null;

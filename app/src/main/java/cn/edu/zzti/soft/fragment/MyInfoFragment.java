@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.zzti.soft.R;
+import cn.edu.zzti.soft.activity.MainActivity;
 import cn.edu.zzti.soft.activity.MyInfoActivity;
 import cn.edu.zzti.soft.activity.SetActivity;
 import cn.edu.zzti.soft.dao.impl.PersonDao;
@@ -61,6 +62,15 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
     private static final int UPDATE_SIGN = 6;
     private static final String fileName ="/sdcard/gxcw/";
 
+	// 弹出提示框
+	private Toast toast;
+	// 记录第一次按下的时间
+	private long firstPressTime = -1;
+	// 记录第二次按下的时间
+	private long lastPressTime;
+	// 两次按下的时间间隔
+	private final long INTERVAL = 2000;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		context = getActivity();
@@ -69,9 +79,33 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
 		view = inflater.inflate(R.layout.fragment_myinfo, container, false);
 		init();
 		listener();
+		toast=Toast.makeText(getActivity(),"再按一次退出程序",Toast.LENGTH_SHORT);
 		return view;
 	}
-	
+
+
+	public void onBackPressed() {
+		showQuitTips();
+	}
+
+	private void showQuitTips(){
+		// 如果是第一次按下 直接提示
+		if (firstPressTime == -1) {
+			firstPressTime = System.currentTimeMillis();
+			toast.show();
+		}
+		// 如果是第二次按下，需要判断与上一次按下的时间间隔，这里设置2秒
+		else {
+			lastPressTime = System.currentTimeMillis();
+			if (lastPressTime - firstPressTime <= INTERVAL) {
+				System.exit(0);
+			} else {
+				firstPressTime = lastPressTime;
+				toast.show();
+			}
+		}
+	}
+
 	@Override
 	public void onStart() {
 		if(lq.getName()!=""){
